@@ -1,7 +1,7 @@
 import type {ReactNode} from "react";
 import type {AbstractIntlMessages} from "next-intl";
 import {NextIntlClientProvider} from "next-intl";
-import {getMessages, unstable_setRequestLocale} from "next-intl/server";
+import {getMessages, setRequestLocale} from "next-intl/server";
 import Navbar from "@/components/site/navbar";
 import Footer from "@/components/site/footer";
 
@@ -18,16 +18,14 @@ export default async function LocaleLayout({
   params: Promise<{locale: Locale}>;
 }) {
   const {locale} = await params;
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const messages = (await getMessages()) as AbstractIntlMessages;
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="Asia/Karachi">
       <div dir={locale === "ar" ? "rtl" : "ltr"} className="min-h-screen bg-background text-foreground">
         <Navbar />
-        <div className="container py-10">
-          {children}
-        </div>
+        <div className="container py-10">{children}</div>
         <Footer />
       </div>
     </NextIntlClientProvider>
