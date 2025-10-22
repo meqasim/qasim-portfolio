@@ -14,7 +14,7 @@ export function Hero() {
         <p className="opacity-70 max-w-prose">{t("hero.blurb")}</p>
 
         <div className="flex gap-3 pt-4">
-          <a className="btn btn-primary" href="#contact">{t("cta.hire")}</a>
+          <a className="btn btn-primary" href="/contact">{t("cta.hire")}</a>
           <a className="btn btn-secondary" href="/cv.pdf" download>{t("cta.cv")}</a>
           <a className="btn btn-accent" href="https://wa.me/923410592668" target="_blank" rel="noreferrer">{t("cta.whatsapp")}</a>
         </div>
