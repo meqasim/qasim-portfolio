@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-14 items-center justify-between px-4">
+      <div className="container mx-auto px-4 flex h-14 items-center justify-between">
         <Link href={withLocale("/")} className="font-semibold">
           HaFiZ <span className="text-emerald-500">MuHaMMaD QaSiM</span>
         </Link>

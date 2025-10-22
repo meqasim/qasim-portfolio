@@ -7,13 +7,24 @@ import Testimonials from "@/components/sections/testimonials";
 
 export default function Page() {
   return (
-    <main>
-      <Hero />
-      <SocialRow />
-      <SkillsGrid />
-      <ProjectsSection />
-      <ServicesTeaser />
-      <Testimonials />
-    </main>
+    <>
+      <section className="container mx-auto px-4">
+        <Hero />
+        <SocialRow />
+        <SkillsGrid />
+      </section>
+
+      <section className="container mx-auto px-4">
+        <ProjectsSection />
+      </section>
+
+      <section className="container mx-auto px-4">
+        <ServicesTeaser />
+      </section>
+
+      <section className="container mx-auto px-4">
+        <Testimonials />
+      </section>
+    </>
   );
 }

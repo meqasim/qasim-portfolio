@@ -17,17 +17,17 @@ export default async function LocaleLayout({
   params
 }: {
   children: ReactNode;
-  params: { locale: Locale };
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = params;
-  setRequestLocale(locale);
+  const { locale: raw } = await params;
+  const locale = (SUPPORTED.includes(raw as Locale) ? (raw as Locale) : "en") as Locale;
 
+  setRequestLocale(locale);
   const messages = await getMessages<AbstractIntlMessages>();
 
   return (
     <html lang={locale} dir={isRTL(locale) ? "rtl" : "ltr"} suppressHydrationWarning>
       <head>
-        {/* Early theme init: keep server & client in sync, no className swap */}
         <Script id="mq-theme-init" strategy="beforeInteractive">
           {`(function(){try{
               var s=localStorage.getItem('theme');
@@ -39,15 +39,11 @@ export default async function LocaleLayout({
             }catch(e){}})();`}
         </Script>
       </head>
-      {/* Use static body classes; dark mode flips via .dark only */}
       <body className="min-h-screen bg-white text-neutral-900 dark:bg-gray-950 dark:text-neutral-200">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />
           <main className="pb-16">
-            {/* Shared container so Hero/Projects/Testimonials align like Services */}
-            <div className="container mx-auto px-4">
-              {children}
-            </div>
+            {children}
           </main>
           <Footer />
         </NextIntlClientProvider>
