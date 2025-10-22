@@ -1,7 +1,6 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { Providers } from "@/components/site/providers";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 
@@ -12,23 +11,22 @@ export default async function LocaleLayout({
   children: ReactNode;
   params: Promise<{ locale: "en" | "ur" | "ar" }>;
 }) {
-  const { locale: raw } = await params;
-  const locale: "en" | "ur" | "ar" = raw === "ur" || raw === "ar" ? raw : "en";
-
+  const { locale } = await params;
   let messages;
   try {
     messages = (await import(`../../../messages/${locale}.json`)).default;
   } catch {
     notFound();
   }
+  const dir = locale === "ur" || locale === "ar" ? "rtl" : "ltr";
 
   return (
-    <Providers>
+    <div data-locale={locale} dir={dir}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <Navbar locale={locale} />
         {children}
-        <Footer locale={locale} />
+        <Footer />
       </NextIntlClientProvider>
-    </Providers>
+    </div>
   );
 }

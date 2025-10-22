@@ -1,34 +1,31 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
-/* Theme tokens */
+/* ---------- Theme tokens ---------- */
 @theme {
   --color-bg: #0b0f12;         /* deep slate */
-  --color-surface: #0f1418;    /* card surface */
-  --color-border: rgba(255,255,255,0.08);
+  --color-surface: #111827;    /* card */
   --color-primary: #16a34a;    /* green-600 */
   --color-primary-500: #22c55e;
 }
 
-/* Base */
+/* ---------- Base ---------- */
 :root { color-scheme: dark; }
 html, body { height: 100%; }
 body {
   background-color: var(--color-bg);
-  /* Gentle layered glow that fully covers viewport */
-  background-image:
-    radial-gradient(900px 480px at 15% -10%, color-mix(in oklab, var(--color-primary) 18%, transparent), transparent),
-    radial-gradient(900px 480px at 85% -10%, color-mix(in oklab, var(--color-primary-500) 16%, transparent), transparent);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* very subtle single tint, no horizontal banding */
+  background-image: radial-gradient(900px 500px at 85% -10%, color-mix(in oklab, var(--color-primary-500), transparent 94%), transparent);
   color: white;
 }
 
 /* Utilities */
-.container-page { margin-inline: auto; max-width: 72rem; padding-inline: 1rem; }
-.glass {
+@utility container-page {
+  margin-left: auto; margin-right: auto;
+  max-width: 72rem; padding-inline: 1rem;
+}
+@utility glass {
   background: rgba(255,255,255,0.05);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255,255,255,0.10);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-radius: 1rem;
 }
-.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 1rem; }
