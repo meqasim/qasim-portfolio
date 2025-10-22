@@ -1,7 +1,7 @@
 import type {ReactNode} from "react";
 import {NextIntlClientProvider} from "next-intl";
 import Navbar from "@/components/site/navbar";
-import Footer from "@/components/site/footer";
+import { Footer } from "@/components/site/footer";
 
 const SUPPORTED = ["en", "ur", "ar"] as const;
 type Locale = typeof SUPPORTED[number];

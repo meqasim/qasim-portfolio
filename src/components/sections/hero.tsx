@@ -1,12 +1,31 @@
-{/* CTA */}
-<div className="mt-5 flex gap-3">
-  <a href="mailto:mq@yourdomain.dev" className="rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-black hover:bg-emerald-400">
-    Hire Me
-  </a>
-  <a href="/cv.pdf" className="rounded-md bg-white/10 px-4 py-2 text-sm hover:bg-white/15 ring-1 ring-white/10">
-    Download CV
-  </a>
-  <a href="https://wa.me/923001234567" target="_blank" className="rounded-md bg-[#25D366] px-4 py-2 text-sm font-medium text-black hover:brightness-110">
-    WhatsApp
-  </a>
-</div>
+import Image from "next/image";
+import Link from "next/link";
+
+export function Hero() {
+  return (
+    <section id="home" className="container grid md:grid-cols-2 gap-8 items-center py-12">
+      <div className="space-y-4">
+        <p className="text-sm uppercase tracking-widest text-emerald-500">Hi, I&apos;m</p>
+        <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+          HaFiZ
+          <br />
+          MuHaMMaD QaSiM
+        </h1>
+        <p className="opacity-80">
+          Full-stack developer specializing in Next.js, TypeScript and modern UI.
+        </p>
+        <div className="flex gap-3">
+          <Link href="/en/contact" className="px-4 py-2 rounded-md bg-emerald-600 text-white">Hire Me</Link>
+          <Link href="/en/projects" className="px-4 py-2 rounded-md border border-foreground/20">Projects</Link>
+        </div>
+      </div>
+
+      <div className="relative w-full aspect-[4/5] md:aspect-square">
+        {/* Ensure /public/hero.png exists. Adjust path if your photo is named differently. */}
+        <Image src="/hero.png" alt="Hafiz Muhammad Qasim" fill className="object-contain object-right" priority />
+      </div>
+    </section>
+  );
+}
+
+export default Hero;
