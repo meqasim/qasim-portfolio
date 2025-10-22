@@ -1,5 +1,5 @@
-﻿"use client";
-import { useParams } from "next/navigation";
+"use client";
+import { useLocale } from "next-intl";
 import { Hero } from "@/components/sections/hero";
 import { SocialRow } from "@/components/sections/social-row";
 import { SkillsGrid } from "@/components/sections/skills-grid";
@@ -8,8 +8,7 @@ import { ServicesTeaser } from "@/components/sections/services-teaser";
 import { Testimonials } from "@/components/sections/testimonials";
 
 export default function Home() {
-  const params = useParams();
-  const locale = (params?.locale as "en"|"ur"|"ar") ?? "en";
+  const locale = (useLocale() as "en" | "ur" | "ar") ?? "en";
   return (
     <main>
       <Hero locale={locale} />
