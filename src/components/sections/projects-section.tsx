@@ -15,7 +15,7 @@ export function ProjectsSection(props: ComponentProps<"section">) {
   const items = PROJECTS as unknown as Project[];
 
   return (
-    <section id="projects" className="container py-16" {...props}>
+    <section id="projects" className="container mx-auto px-4 py-16" {...props}>
       <h2 className="text-xl font-semibold mb-8">Selected Projects</h2>
 
       <div className="relative">

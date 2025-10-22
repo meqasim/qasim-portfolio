@@ -3,26 +3,22 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    <section id="home" className="container grid md:grid-cols-2 gap-8 items-center py-12">
-      <div className="space-y-4">
-        <p className="text-sm uppercase tracking-widest text-emerald-500">Hi, I&apos;m</p>
-        <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
-          HaFiZ
-          <br />
-          MuHaMMaD QaSiM
-        </h1>
-        <p className="opacity-80">
-          Full-stack developer specializing in Next.js, TypeScript and modern UI.
-        </p>
-        <div className="flex gap-3">
-          <Link href="/en/contact" className="px-4 py-2 rounded-md bg-emerald-600 text-white">Hire Me</Link>
-          <Link href="/en/projects" className="px-4 py-2 rounded-md border border-foreground/20">Projects</Link>
+    <section className="container mx-auto px-4 py-14">
+      <div className="grid md:grid-cols-[1.2fr,1fr] items-center gap-10">
+        <div>
+          <p className="text-xs tracking-widest text-emerald-400 mb-2">HI, I&apos;M</p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">HaFiZ <span className="text-emerald-500">MuHaMMaD QaSiM</span></h1>
+          <p className="opacity-80 max-w-xl">
+            Full-stack developer specializing in Next.js, TypeScript and modern UI.
+          </p>
+          <div className="mt-6 flex gap-3">
+            <Link href="/contact" className="px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-500">Hire Me</Link>
+            <Link href="/projects" className="px-4 py-2 rounded-md ring-1 ring-white/15 hover:bg-white/5">Projects</Link>
+          </div>
         </div>
-      </div>
-
-      <div className="relative w-full aspect-[4/5] md:aspect-square">
-        {/* Ensure /public/hero.png exists. Adjust path if your photo is named differently. */}
-        <Image src="/hero.png" alt="Hafiz Muhammad Qasim" fill className="object-contain object-right" priority />
+        <div className="justify-self-center">
+          <Image src="/hero.png" alt="Hafiz Muhammad Qasim" width={360} height={460} className="rounded-xl ring-1 ring-white/10" />
+        </div>
       </div>
     </section>
   );
