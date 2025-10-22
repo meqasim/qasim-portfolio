@@ -1,22 +1,23 @@
-"use client";
-import {useTheme} from "next-themes";
+﻿"use client";
 import {useEffect, useState} from "react";
+import {useTheme} from "next-themes";
 
 export function ThemeToggle() {
   const {resolvedTheme, setTheme} = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  if (!mounted) return <button className="px-2 py-1">🌙</button>;
+  if (!mounted) return null;
 
-  const isDark = (resolvedTheme ?? "dark") === "dark";
+  const isDark = resolvedTheme === "dark";
   return (
     <button
-      aria-label="Toggle theme"
-      className="px-2 py-1 rounded hover:opacity-80"
+      type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      title={isDark ? "Switch to light" : "Switch to dark"}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="px-2 py-1 rounded-md border border-white/15 hover:border-white/30 transition text-xs"
+      title={isDark ? "Light" : "Dark"}
     >
-      {isDark ? "☀" : "🌙"}
+      {isDark ? "☀️" : "🌙"}
     </button>
   );
 }
