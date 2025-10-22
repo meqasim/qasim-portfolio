@@ -19,13 +19,14 @@ export function Hero({ locale }: { locale: "en"|"ur"|"ar" }) {
         </div>
       </div>
 
-      <div className="relative w-full aspect-[4/3] rounded-2xl glass overflow-hidden">
+      {/* Taller container; contain the portrait so it doesn’t crop */}
+      <div className="relative w-full aspect-[3/4] max-h-[640px] mx-auto glass overflow-hidden">
         <Image
-          src="/images/qasim-full.png"            // <-- PNG path in /public/images
+          src="/images/qasim-full.png"    // ensure file exists in /public/images
           alt={t("alt.fullBody")}
           fill
-          sizes="(max-width: 1024px) 100vw, 560px"
-          className="object-cover"
+          sizes="(max-width:1024px) 100vw, 520px"
+          className="object-contain"
           priority
         />
       </div>
