@@ -1,40 +1,35 @@
 ﻿"use client";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
-import { PROFILE } from "@/content/site";
 
-export function Hero({ locale }: { locale: "en" | "ur" | "ar" }) {
+export function Hero() {
+  const t = useTranslations();
+
   return (
-    <section className="container-page py-14 md:py-20">
-      <div className="grid md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-semibold">Muhammad Qasim</h1>
-          <p className="opacity-90">Full-Stack Web Developer & Blogger</p>
-          <p className="opacity-75 max-w-prose">
-            I build fast, clean, business-ready web apps with Next.js, TypeScript, and Tailwind.
-          </p>
-          <div className="flex gap-3 pt-2">
-            <Link href="#contact" className="rounded-full px-4 py-2 bg-[--color-primary] text-black">Hire Me</Link>
-            <Link href="/resume" className="rounded-full px-4 py-2 glass">Download CV</Link>
-            <a href={PROFILE.whatsapp} className="rounded-full px-4 py-2 glass">WhatsApp</a>
-          </div>
+    <section className="container-page grid lg:grid-cols-2 gap-10 py-12">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold">{t("hero.title")}</h1>
+        <p className="opacity-90">{t("hero.subtitle")}</p>
+        <p className="opacity-70 max-w-prose">{t("hero.blurb")}</p>
+        <div className="flex gap-3 pt-2">
+          <a className="chip" href="#contact">{t("cta.hire")}</a>
+          <a className="chip" href="/resume">{t("cta.cv")}</a>
+          <a className="chip" href="https://wa.me/923410592668" target="_blank" rel="noreferrer">{t("cta.whatsapp")}</a>
         </div>
+      </div>
 
-        <figure className="relative aspect-[4/5] md:aspect-[5/4] rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+      <div className="relative">
+        <div className="glass p-3">
           <Image
             src="/images/qasim-full.jpg"
-            alt="Full-body portrait of Muhammad Qasim"
-            fill
+            alt={t("alt.fullBody")}
+            width={900}
+            height={1200}
             priority
-            sizes="(max-width: 768px) 100vw, 44rem"
-            className="object-cover object-top"
-            onError={(e) => {
-              // If .jpg missing, try .png without crashing
-              const img = e.currentTarget as HTMLImageElement;
-              if (!img.src.endsWith(".png")) img.src = "/images/qasim-full.png";
-            }}
+            sizes="(max-width: 1024px) 100vw, 600px"
+            className="w-full h-[28rem] object-cover rounded-xl"
           />
-        </figure>
+        </div>
       </div>
     </section>
   );

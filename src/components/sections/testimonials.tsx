@@ -1,15 +1,18 @@
-﻿import { TESTIMONIALS } from "@/content/testimonials";
+﻿"use client";
+import { useTranslations } from "next-intl";
+import { TESTIMONIALS } from "@/content/testimonials";
 
-export function Testimonials(){
+export function Testimonials() {
+  const t = useTranslations("sections");
   return (
-    <section className="container-page py-12 space-y-6">
-      <h2 className="text-2xl font-semibold">Testimonials</h2>
+    <section className="container-page py-10 space-y-6">
+      <h2 className="text-xl font-semibold">{t("testimonials")}</h2>
       <div className="grid md:grid-cols-2 gap-6">
-        {TESTIMONIALS.map((t) => (
-          <div key={t.name} className="glass rounded-2xl p-5">
-            <div className="font-medium">{t.name}</div>
-            <div className="text-xs opacity-70">{t.role}</div>
-            <p className="mt-3 opacity-90">“{t.quote}”</p>
+        {TESTIMONIALS.map((x, i) => (
+          <div key={i} className="glass p-5">
+            <div className="text-sm opacity-70">{x.role}</div>
+            <div className="font-medium">{x.name}</div>
+            <p className="opacity-80 pt-2">“{x.quote}”</p>
           </div>
         ))}
       </div>
