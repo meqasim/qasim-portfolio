@@ -1,35 +1,33 @@
 ﻿"use client";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-export function Hero() {
+export function Hero({ locale }: { locale: "en"|"ur"|"ar" }) {
   const t = useTranslations();
 
   return (
-    <section className="container-page grid lg:grid-cols-2 gap-10 py-12">
+    <section className="container-page py-10 lg:py-16 grid gap-10 lg:grid-cols-[1.2fr,1fr] items-center">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">{t("hero.title")}</h1>
-        <p className="opacity-90">{t("hero.subtitle")}</p>
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">Muhammad Qasim</h1>
+        <p className="opacity-80">{t("hero.subtitle")}</p>
         <p className="opacity-70 max-w-prose">{t("hero.blurb")}</p>
-        <div className="flex gap-3 pt-2">
-          <a className="chip" href="#contact">{t("cta.hire")}</a>
-          <a className="chip" href="/resume">{t("cta.cv")}</a>
-          <a className="chip" href="https://wa.me/923410592668" target="_blank" rel="noreferrer">{t("cta.whatsapp")}</a>
+
+        <div className="flex gap-3 pt-4">
+          <a className="btn btn-primary" href="#contact">{t("cta.hire")}</a>
+          <a className="btn btn-secondary" href="/cv.pdf" download>{t("cta.cv")}</a>
+          <a className="btn btn-accent" href="https://wa.me/923410592668" target="_blank" rel="noreferrer">{t("cta.whatsapp")}</a>
         </div>
       </div>
 
-      <div className="relative">
-        <div className="glass p-3">
-          <Image
-            src="/images/qasim-full.jpg"
-            alt={t("alt.fullBody")}
-            width={900}
-            height={1200}
-            priority
-            sizes="(max-width: 1024px) 100vw, 600px"
-            className="w-full h-[28rem] object-cover rounded-xl"
-          />
-        </div>
+      <div className="relative w-full aspect-[4/3] rounded-2xl glass overflow-hidden">
+        <Image
+          src="/images/qasim-full.png"            // <-- PNG path in /public/images
+          alt={t("alt.fullBody")}
+          fill
+          sizes="(max-width: 1024px) 100vw, 560px"
+          className="object-cover"
+          priority
+        />
       </div>
     </section>
   );
