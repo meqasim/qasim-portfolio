@@ -1,40 +1,12 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import {useTranslations} from "next-intl";
-
-export function Hero() {
-  const t = useTranslations();
-
-  return (
-    <section className="container-page grid md:grid-cols-2 gap-8 py-10 md:py-16">
-      <div className="self-center space-y-4">
-        <h1 className="text-3xl md:text-4xl font-semibold">{t("hero.title")}</h1>
-        <p className="opacity-80">{t("hero.subtitle")}</p>
-        <p className="opacity-70 max-w-prose">{t("hero.blurb")}</p>
-        <div className="flex flex-wrap gap-3 pt-2">
-          <Link href="./contact" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
-            {t("cta.hire")}
-          </Link>
-          <a href="/cv.pdf" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
-            {t("cta.cv")}
-          </a>
-          <a href="https://wa.me/923410592668" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
-            {t("cta.whatsapp")}
-          </a>
-        </div>
-      </div>
-
-      <div className="relative h-[420px] md:h-[560px]">
-        <Image
-          src="/images/qasim-full.png"
-          alt={t("alt.fullBody")}
-          fill
-          priority
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain object-bottom"
-        />
-      </div>
-    </section>
-  );
-}
+{/* CTA */}
+<div className="mt-5 flex gap-3">
+  <a href="mailto:mq@yourdomain.dev" className="rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-black hover:bg-emerald-400">
+    Hire Me
+  </a>
+  <a href="/cv.pdf" className="rounded-md bg-white/10 px-4 py-2 text-sm hover:bg-white/15 ring-1 ring-white/10">
+    Download CV
+  </a>
+  <a href="https://wa.me/923001234567" target="_blank" className="rounded-md bg-[#25D366] px-4 py-2 text-sm font-medium text-black hover:brightness-110">
+    WhatsApp
+  </a>
+</div>

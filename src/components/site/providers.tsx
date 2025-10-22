@@ -1,14 +1,10 @@
-"use client";
-import { ThemeProvider } from "next-themes";
+'use client';
 
-export function Providers({ children }: { children: React.ReactNode }) {
+import {ThemeProvider} from 'next-themes';
+
+export function Providers({children}: {children: React.ReactNode}) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"      // uses OS preference on first load
-      enableSystem
-      disableTransitionOnChange  // prevents flicker on theme switch
-    >
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="mq-theme">
       {children}
     </ThemeProvider>
   );

@@ -1,26 +1,40 @@
-"use client";
-import { useTranslations } from "next-intl";
-import { PROJECTS } from "@/content/projects";
-import Link from "next/link";
+import { PROJECTS as projects } from "@/content/projects";
 
 export function ProjectsSection() {
-  const t = useTranslations("sections");
   return (
-    <section id="projects" className="container-page py-10 space-y-6">
-      <h2 className="text-xl font-semibold">{t("projects")}</h2>
-      <div className="grid md:grid-cols-2 gap-6">
-        {PROJECTS.map((p, i) => (
-          <div key={i} className="glass p-5 space-y-2">
-            <div className="flex items-center justify-between">
-              <h3 className="font-medium">{p.title}</h3>
-              {p.period ? <span className="chip">{p.period}</span> : null}
-            </div>
-            {p.subtitle ? <p className="opacity-70 text-sm">{p.subtitle}</p> : null}
-            {p.stack?.length ? <div className="flex flex-wrap gap-2 pt-1">{p.stack.map(s => <span key={s} className="chip">{s}</span>)}</div> : null}
-            {p.highlights?.length ? <ul className="list-disc pl-5 opacity-80">{p.highlights.map(h => <li key={h}>{h}</li>)}</ul> : null}
-            {p.links?.length ? <div className="pt-1">{p.links.map(l => <Link key={l.href} className="underline opacity-90 hover:opacity-100" href={l.href} target="_blank">{l.label}</Link>)}</div> : null}
-          </div>
-        ))}
+    <section id="projects" className="mt-16">
+      <h2 className="mb-6 text-xl font-semibold">Selected Projects</h2>
+
+      <div className="relative mx-auto max-w-4xl">
+        {/* center line */}
+        <div className="pointer-events-none absolute left-1/2 top-0 -ml-px h-full w-0.5 bg-gradient-to-b from-emerald-300/40 via-emerald-300/10 to-transparent" />
+
+        <ol className="space-y-10">
+          {projects.map((p: any, i: number) => {
+            const left = i % 2 === 0;
+            return (
+              <li key={p.title} className="relative grid grid-cols-1 md:grid-cols-2">
+                <div className={left ? "md:col-start-1 md:pr-8" : "md:col-start-2 md:pl-8"}>
+                  <div className="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                    {p.badge && <div className="mb-1 text-[13px] text-emerald-300/80">{p.badge}</div>}
+                    <div className="text-base font-medium">{p.title}</div>
+                    {p.summary && <p className="mt-2 text-sm text-neutral-300/80">{p.summary}</p>}
+                    {p.link && (
+                      <a href={p.link} target="_blank" className="mt-3 inline-block text-sm text-emerald-300 hover:underline">
+                        Open
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* connector dot */}
+                <span
+                  className="pointer-events-none absolute left-1/2 top-4 z-10 -ml-2 h-4 w-4 rounded-full bg-emerald-400/60 ring-4 ring-gray-950 dark:ring-gray-950"
+                />
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

@@ -1,35 +1,26 @@
-import type { ReactNode } from "react";
-import { NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
-import { Navbar } from "@/components/site/navbar";
-import { Footer } from "@/components/site/footer";
+import type {ReactNode} from 'react';
+import {NextIntlClientProvider} from 'next-intl';
+import {Navbar} from '@/components/site/navbar';
+import {Footer} from '@/components/site/footer';
+
+export const runtime = 'edge';
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{locale: 'en' | 'ur' | 'ar' | string}>;
 }) {
-  const { locale: raw } = await params;
-  const locale = (raw === "ur" || raw === "ar") ? raw : "en";
-
-  let messages;
-  try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch {
-    notFound();
-  }
-
-  const dir = (locale === "ur" || locale === "ar") ? "rtl" : "ltr";
+  const {locale} = await params;
+  const active = (['en', 'ur', 'ar'] as const).includes(locale as any) ? locale : 'en';
+  const messages = (await import(`../../../messages/${active}.json`)).default;
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <div dir={dir} className="min-h-screen">
-        <Navbar />
-        {children}
-        <Footer />
-      </div>
+    <NextIntlClientProvider locale={active} messages={messages}>
+      <Navbar />
+      <main className="mx-auto max-w-6xl px-3 py-8 sm:px-4">{children}</main>
+      <Footer />
     </NextIntlClientProvider>
   );
 }

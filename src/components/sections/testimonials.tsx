@@ -1,19 +1,19 @@
-"use client";
-import { useTranslations } from "next-intl";
-import { TESTIMONIALS } from "@/content/testimonials";
-
 export function Testimonials() {
-  const t = useTranslations("sections");
+  const items = [
+    {name: 'Client A', role: 'Founder, Startup', quote: 'Qasim ships fast, clean, and reliable features.'},
+    {name: 'Client B', role: 'PM, Agency', quote: 'Great communication and attention to detail.'},
+  ];
   return (
-    <section className="container-page py-10 space-y-6">
-      <h2 className="text-xl font-semibold">{t("testimonials")}</h2>
-      <div className="grid md:grid-cols-2 gap-6">
-        {TESTIMONIALS.map((x, i) => (
-          <div key={i} className="glass p-5">
-            <div className="text-sm opacity-70">{x.role}</div>
-            <div className="font-medium">{x.name}</div>
-            <p className="opacity-80 pt-2">“{x.quote}”</p>
-          </div>
+    <section id="testimonials" className="mt-16">
+      <h2 className="mb-6 text-xl font-semibold">Testimonials</h2>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {items.map(t => (
+          <figure key={t.name} className="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+            <blockquote className="text-sm text-neutral-300/90">“{t.quote}”</blockquote>
+            <figcaption className="mt-3 text-xs text-neutral-400">
+              <span className="font-medium text-neutral-200">{t.name}</span> — {t.role}
+            </figcaption>
+          </figure>
         ))}
       </div>
     </section>
