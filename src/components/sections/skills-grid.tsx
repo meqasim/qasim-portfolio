@@ -1,4 +1,4 @@
-﻿import { SKILLS } from "@/content/site";
+import { SKILLS } from "@/content/site";
 
 export function SkillsGrid(){
   return (

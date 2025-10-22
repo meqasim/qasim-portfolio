@@ -1,4 +1,4 @@
-﻿export function Footer() {
+export function Footer() {
   return (
     <footer className="container-page py-10 text-sm opacity-90">
       <div className="grid gap-6 sm:grid-cols-2 items-start">

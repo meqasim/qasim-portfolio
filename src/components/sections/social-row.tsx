@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { SOCIALS } from "@/content/site";
 
 export function SocialRow(){

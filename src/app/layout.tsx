@@ -1,4 +1,4 @@
-﻿import "./globals.css";
+import "./globals.css";
 import type { ReactNode } from "react";
 import { Providers } from "@/components/site/providers";
 import { getLocale } from "next-intl/server";

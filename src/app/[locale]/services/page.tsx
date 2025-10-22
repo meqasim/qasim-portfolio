@@ -1,4 +1,4 @@
-﻿import { getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { SERVICES } from "@/content/services";
 
 export default async function Page() {

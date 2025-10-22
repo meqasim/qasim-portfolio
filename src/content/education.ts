@@ -1,4 +1,4 @@
-﻿export type Education = {
+export type Education = {
   title: string;
   org?: string;
   years?: string;

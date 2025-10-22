@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { Project } from "@/content/projects";
 
 export function ProjectCard({ p }: { p: Project }){

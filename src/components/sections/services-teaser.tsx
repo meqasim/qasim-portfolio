@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { SERVICES } from "@/content/services";

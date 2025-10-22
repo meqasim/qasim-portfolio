@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 export function LangSwitcher({ locale }: { locale: "en"|"ur"|"ar" }){
   const locales: Array<["en"|"ur"|"ar", string]> = [["en","EN"],["ur","اردو"],["ar","العربية"]];

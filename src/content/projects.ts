@@ -1,4 +1,4 @@
-﻿export type Project = {
+export type Project = {
   title: string; subtitle?: string; period?: string;
   stack: string[]; highlights: string[]; links?: {label:string; href:string}[];
 };

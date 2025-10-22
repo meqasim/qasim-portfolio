@@ -1,4 +1,4 @@
-﻿import { getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { ProjectsSection } from "@/components/sections/projects-section";
 
 export default async function Page() {

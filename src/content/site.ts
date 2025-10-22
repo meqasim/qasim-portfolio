@@ -1,4 +1,4 @@
-﻿export const PROFILE = {
+export const PROFILE = {
   name: "Muhammad Qasim",
   role: "Full-Stack Web Developer & Blogger",
   email: "qasimofficials@gmail.com",
