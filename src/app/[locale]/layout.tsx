@@ -2,6 +2,9 @@
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { Providers } from "@/components/site/providers";
+import { Navbar } from "@/components/site/navbar";
+import { Footer } from "@/components/site/footer";
+import "../globals.css";
 
 export default async function LocaleLayout({
   children,
@@ -21,10 +24,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body>
+      <body className="min-h-screen antialiased">
         <Providers>
           <NextIntlClientProvider locale={locale} messages={messages}>
+            <Navbar locale={locale} />
             {children}
+            <Footer locale={locale} />
           </NextIntlClientProvider>
         </Providers>
       </body>
