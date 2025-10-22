@@ -1,34 +1,36 @@
 "use client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function Hero() {
   const t = useTranslations();
+  const locale = useLocale();
 
   return (
-    <section className="container-page py-10 lg:py-16 grid gap-10 lg:grid-cols-2 items-center">
-      {/* LEFT: copy */}
-      <div className="space-y-4">
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">Muhammad Qasim</h1>
+    <section className="container-page grid md:grid-cols-2 gap-8 py-10 md:py-16">
+      {/* left: copy */}
+      <div className="self-center space-y-4">
+        <h1 className="text-3xl md:text-4xl font-semibold">{t("hero.title")}</h1>
         <p className="opacity-80">{t("hero.subtitle")}</p>
         <p className="opacity-70 max-w-prose">{t("hero.blurb")}</p>
 
-        <div className="flex gap-3 pt-4">
-          <a className="btn btn-primary" href="/contact">{t("cta.hire")}</a>
-          <a className="btn btn-secondary" href="/cv.pdf" download>{t("cta.cv")}</a>
-          <a className="btn btn-accent" href="https://wa.me/923410592668" target="_blank" rel="noreferrer">{t("cta.whatsapp")}</a>
+        <div className="flex gap-3 pt-2">
+          <a href="https://wa.me/923410592668" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
+            {t("cta.whatsapp")}
+          </a>
+          <a href="/cv.pdf" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">{t("cta.cv")}</a>
         </div>
       </div>
 
-      {/* RIGHT: full-body portrait */}
-      <div className="relative w-full max-w-[420px] aspect-[3/4] justify-self-end glass overflow-hidden">
+      {/* right: photo (kept fully visible) */}
+      <div className="relative h-[420px] md:h-[560px]">
         <Image
           src="/images/qasim-full.png"
           alt={t("alt.fullBody")}
           fill
-          sizes="(max-width:1024px) 80vw, 420px"
-          className="object-contain"
           priority
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-contain object-bottom"
         />
       </div>
     </section>

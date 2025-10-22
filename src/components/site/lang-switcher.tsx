@@ -1,14 +1,21 @@
 "use client";
 import Link from "next/link";
-export function LangSwitcher({ locale }: { locale: "en"|"ur"|"ar" }){
-  const locales: Array<["en"|"ur"|"ar", string]> = [["en","EN"],["ur","اردو"],["ar","العربية"]];
+
+type L = "en"|"ur"|"ar";
+const LOCALES: L[] = ["en","ur","ar"];
+
+export function LangSwitcher({ current }: { current: L }) {
   return (
-    <nav className="flex items-center gap-3">
-      {locales.map(([code, label]) => (
-        <Link key={code} href={`/${code}`} className={`lang-link ${locale===code ? "opacity-100" : ""}`}>
-          {label}
+    <div className="flex items-center gap-1">
+      {LOCALES.map(code => (
+        <Link
+          key={code}
+          href={`/${code}`}
+          className={"px-2 py-1 rounded text-xs border " + (code===current ? "border-white/80 opacity-100" : "border-white/20 opacity-70 hover:opacity-100")}
+        >
+          {code.toUpperCase()}
         </Link>
       ))}
-    </nav>
+    </div>
   );
 }

@@ -1,51 +1,21 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
-/* ---------- Theme tokens ---------- */
 @theme {
-  --color-primary: #16a34a;     /* green-600 */
-  --color-primary-500: #22c55e; /* green-500 */
+  --color-bg: #0b0f12;
 }
 
-/* Base tokens for each theme (next-themes sets html.dark or html.light) */
-html { color-scheme: light; }
-html.dark { color-scheme: dark; }
-
-:root {
-  --bg: #0b0f12;
-  --surface: #111827;
-  --text: #ffffff;
-}
-html.light {
-  --bg: #f3f6f9;
-  --surface: #ffffff;
-  --text: #0b1220;
-}
-
-/* Page background: solid base + two subtle radial washes; fixed to avoid seams */
+:root { color-scheme: dark; }
 html, body { height: 100%; }
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  background-image:
-    radial-gradient(1100px 520px at 15% -10%, color-mix(in oklch, var(--color-primary) 18%, transparent), transparent),
-    radial-gradient(1000px 480px at 105% -10%, color-mix(in oklch, var(--color-primary-500) 14%, transparent), transparent);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: var(--color-bg);
+  color: white;
 }
 
-/* Utilities */
-@utility container-page { margin-inline: auto; max-width: 72rem; padding-inline: 1rem; }
-
-@utility glass {
-  background: color-mix(in oklab, var(--surface), transparent 86%);
-  border: 1px solid color-mix(in oklab, var(--surface), transparent 70%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 1rem;
+/* container utility */
+@utility container-page {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 72rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
-
-/* Simple button styles used in Hero */
-@utility btn { display:inline-flex; align-items:center; gap:.5rem; padding:.625rem 1rem; border-radius:.75rem; font-weight:500; }
-@utility btn-primary { background: var(--color-primary); color:#fff; }
-@utility btn-secondary { background: color-mix(in oklab, var(--surface), transparent 25%); border:1px solid color-mix(in oklab, var(--surface), transparent 55%); }
-@utility btn-accent { background: var(--color-primary-500); color:#032106; }

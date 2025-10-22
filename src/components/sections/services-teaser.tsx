@@ -1,29 +1,19 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
-import { SERVICES } from "@/content/services";
+import { useLocale, useTranslations } from "next-intl";
 
 export function ServicesTeaser() {
   const t = useTranslations();
-  const locale = useLocale();
+  const loc = useLocale() as "en"|"ur"|"ar";
   return (
-    <section className="container-page py-12 space-y-6" id="services">
-      <h2 className="text-xl font-semibold">{t("sections.services")}</h2>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {SERVICES.map((s, i) => (
-          <div key={i} className="glass p-5">
-            <div className="font-medium">{s.title}</div>
-            <ul className="mt-2 list-disc ms-5 opacity-80 text-sm">
-              {s.points.map((p, j) => <li key={j}>{p}</li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div>
-        <Link href={`/${locale}/services`} className="text-sm underline opacity-80 hover:opacity-100">
-          View all services →
+    <section className="container-page py-10">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-semibold">{t("sections.services")}</h2>
+        <Link href={`/${loc}/services`} className="text-sm underline underline-offset-4 opacity-80 hover:opacity-100">
+          See all
         </Link>
       </div>
+      <p className="opacity-70 text-sm mt-2">Services cards coming on the Services page.</p>
     </section>
   );
 }
