@@ -1,4 +1,4 @@
-﻿import type { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { Providers } from "@/components/site/providers";
@@ -11,15 +11,18 @@ export default async function LocaleLayout({
   params,
 }: {
   children: ReactNode;
-  params: { locale: "en" | "ur" | "ar" };
+  params: Promise<{ locale: "en" | "ur" | "ar" }>;
 }) {
-  const { locale } = params;
+  const { locale: raw } = await params;
+  const locale: "en" | "ur" | "ar" = raw === "ur" || raw === "ar" ? raw : "en";
+
   let messages;
   try {
     messages = (await import(`../../../messages/${locale}.json`)).default;
   } catch {
     notFound();
   }
+
   const dir = (locale === "ur" || locale === "ar") ? "rtl" : "ltr";
 
   return (
