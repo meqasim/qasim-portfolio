@@ -1,15 +1,17 @@
-﻿import { SERVICES } from "@/content/services";
+﻿import { getTranslations } from "next-intl/server";
+import { SERVICES } from "@/content/services";
 
-export default function ServicesPage(){
+export default async function Page() {
+  const t = await getTranslations();
   return (
-    <main className="container-page py-12 space-y-6">
-      <h1 className="text-3xl font-semibold">Services</h1>
-      <div className="grid md:grid-cols-3 gap-4">
-        {SERVICES.map(s => (
-          <div key={s.title} className="glass rounded-2xl p-5">
-            <div className="text-lg font-medium">{s.title}</div>
-            <ul className="mt-3 text-sm opacity-90 space-y-1 list-disc list-inside">
-              {s.points.map((p,i)=><li key={i}>{p}</li>)}
+    <main className="container-page py-10 space-y-6">
+      <h1 className="text-2xl font-semibold">{t("sections.services")}</h1>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {SERVICES.map((s, i) => (
+          <div key={i} className="glass p-5">
+            <div className="font-medium">{s.title}</div>
+            <ul className="mt-2 list-disc ms-5 opacity-80 text-sm">
+              {s.points.map((p, j) => <li key={j}>{p}</li>)}
             </ul>
           </div>
         ))}

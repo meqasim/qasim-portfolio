@@ -1,13 +1,12 @@
-﻿import { PROJECTS } from "@/content/projects";
-import { ProjectCard } from "@/components/sections/project-card";
+﻿import { getTranslations } from "next-intl/server";
+import { ProjectsSection } from "@/components/sections/projects-section";
 
-export default function ProjectsPage(){
+export default async function Page() {
+  const t = await getTranslations();
   return (
-    <main className="container-page py-12 space-y-6">
-      <h1 className="text-3xl font-semibold">Projects</h1>
-      <div className="grid md:grid-cols-2 gap-6">
-        {PROJECTS.map(p => <ProjectCard key={p.title} p={p} />)}
-      </div>
+    <main className="container-page py-10 space-y-6">
+      <h1 className="text-2xl font-semibold">{t("sections.projects")}</h1>
+      <ProjectsSection />
     </main>
   );
 }
