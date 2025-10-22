@@ -1,28 +1,28 @@
-'use client';
+"use client";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
+import {Globe} from "lucide-react";
 
-import Link from 'next/link';
-import {usePathname} from 'next/navigation';
-import {useLocale} from 'next-intl';
-
-export function LangSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname() ?? '/';
-  const rest = pathname.replace(/^\/(en|ur|ar)/, '') || '';
-
-  const LOCALES = ['en', 'ur', 'ar'] as const;
+export default function LangSwitcher() {
+  const pathname = usePathname() || "/en";
+  const segs = pathname.split("/").filter(Boolean);
+  const current = (segs[0] || "en") as "en" | "ur" | "ar";
+  const rest = segs.slice(1).join("/");
+  const to = (loc: "en" | "ur" | "ar") => `/${loc}${rest ? "/" + rest : ""}`;
 
   return (
-    <div className="inline-flex overflow-hidden rounded-md bg-white/5 ring-1 ring-white/10">
-      {LOCALES.map(l => (
+    <div className="inline-flex items-center gap-1">
+      <Globe size={16} className="opacity-70" />
+      {(["en","ur","ar"] as const).map((loc) => (
         <Link
-          key={l}
-          href={`/${l}${rest}`}
-          className={[
-            'px-2 py-1 text-[11px] uppercase',
-            l === locale ? 'bg-emerald-400/20 text-emerald-200' : 'text-neutral-300 hover:text-emerald-200',
-          ].join(' ')}
+          key={loc}
+          href={to(loc)}
+          className={
+            "px-2 py-1 rounded text-xs ring-1 ring-white/10 " +
+            (loc === current ? "bg-emerald-600/15 text-emerald-400" : "hover:bg-white/5")
+          }
         >
-          {l}
+          {loc.toUpperCase()}
         </Link>
       ))}
     </div>

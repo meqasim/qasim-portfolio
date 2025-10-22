@@ -1,41 +1,45 @@
-import { PROJECTS } from "@/content/projects";
+import type {ComponentProps} from "react";
+import {PROJECTS} from "@/content/projects";
 
-type Project = (typeof PROJECTS)[number];
+type LinkInfo = { live?: string; repo?: string };
+type Project = {
+  slug?: string;
+  title: string;
+  year?: string | number;
+  subtitle?: string;
+  bullets?: string[];
+  links?: LinkInfo;
+};
 
-export function ProjectsSection() {
-  const items: readonly Project[] = PROJECTS;
+export function ProjectsSection(props: ComponentProps<"section">) {
+  const items = PROJECTS as unknown as Project[];
 
   return (
-    <section id="projects" className="container py-12">
-      <h2 className="text-2xl font-bold mb-6">Projects</h2>
+    <section id="projects" className="container py-16" {...props}>
+      <h2 className="text-xl font-semibold mb-8">Selected Projects</h2>
+
       <div className="relative">
-        {/* vertical timeline line */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-foreground/20 pointer-events-none" />
-        <ol className="space-y-10">
-          {items.map((p, idx) => (
-            <li key={idx} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-              {/* left/right alternate around the center line */}
-              <div className={(idx % 2 === 0 ? "order-1" : "order-2") + " md:text-right"}>
-                <h3 className="text-xl font-semibold">{(p as any).title ?? (p as any).name}</h3>
-                {"subtitle" in p && (p as any).subtitle ? (
-                  <p className="opacity-80">{(p as any).subtitle}</p>
-                ) : null}
-              </div>
-              <div className={(idx % 2 === 0 ? "order-2" : "order-1") + " relative"}>
-                <div className="absolute md:left-[-0.55rem] left-1/2 md:translate-x-0 -translate-x-1/2 top-2 h-3 w-3 rounded-full bg-foreground" />
-                {"description" in p && (p as any).description ? (
-                  <p className="text-sm opacity-80">{(p as any).description}</p>
-                ) : null}
-                {"link" in p && (p as any).link ? (
-                  <a
-                    href={(p as any).link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-3 inline-block underline underline-offset-4"
-                  >
-                    Visit
-                  </a>
-                ) : null}
+        <div className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-white/10" />
+        <ol className="space-y-12">
+          {items.map((p, i) => (
+            <li key={p.slug ?? i} className="relative">
+              <span className="absolute left-1/2 -translate-x-1/2 -top-2 h-4 w-4 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20" />
+              <div className={"grid md:grid-cols-2 gap-8 " + (i % 2 ? "md:[&>*:first-child]:order-2" : "")}>
+                <div className="md:text-right">
+                  {p.year && <div className="text-emerald-400 text-sm">{p.year}</div>}
+                  <h3 className="font-semibold">{p.title}</h3>
+                  {p.subtitle && <p className="opacity-75 text-sm">{p.subtitle}</p>}
+                </div>
+                <div>
+                  {p.bullets && p.bullets.length > 0 && (
+                    <ul className="list-disc ms-5 space-y-1 text-sm opacity-90">
+                      {p.bullets.map((b, idx) => <li key={idx}>{b}</li>)}
+                    </ul>
+                  )}
+                  {p.links?.live && (
+                    <a href={p.links.live} className="text-emerald-400 text-sm underline mt-2 inline-block">Live</a>
+                  )}
+                </div>
               </div>
             </li>
           ))}
