@@ -26,9 +26,9 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div dir={dir} className="min-h-screen">
-        <Navbar locale={locale as "en"|"ur"|"ar"} />
+        <Navbar />
         {children}
-        <Footer locale={locale as "en"|"ur"|"ar"} />
+        <Footer />
       </div>
     </NextIntlClientProvider>
   );

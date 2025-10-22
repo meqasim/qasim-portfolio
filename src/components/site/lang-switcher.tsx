@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 type L = "en"|"ur"|"ar";
 const LOCALES: L[] = ["en","ur","ar"];
 
-export function LangSwitcher({ current }: { current: L }) {
+export function LangSwitcher() {
+  const current = (useLocale() as L) ?? "en";
   return (
     <div className="flex items-center gap-1">
       {LOCALES.map(code => (

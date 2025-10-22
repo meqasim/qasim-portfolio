@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 import { LangSwitcher } from "@/components/site/lang-switcher";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
@@ -15,13 +16,14 @@ const routes = [
   { slug: "resume",   label: "Resume"   }
 ];
 
-export function Navbar({ locale }: { locale: L }) {
+export function Navbar() {
+  const locale = (useLocale() as L) ?? "en";
   const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-40 bg-[rgba(0,0,0,.35)] backdrop-blur-md border-b border-white/10">
       <nav className="container-page flex items-center justify-between py-3">
-        {/* Left: Brand (two lines) */}
+        {/* Left: Brand in two lines */}
         <div className="leading-none font-semibold tracking-tight">
           <Link href={`/${locale}`} className="block">
             <span className="text-sm block">HaFiZ</span>
@@ -49,7 +51,7 @@ export function Navbar({ locale }: { locale: L }) {
 
         {/* Right: Lang + Theme */}
         <div className="flex items-center gap-3">
-          <LangSwitcher current={locale} />
+          <LangSwitcher />
           <ThemeToggle />
         </div>
       </nav>
