@@ -9,9 +9,10 @@ export default async function LocaleLayout({
   params
 }: {
   children: ReactNode;
-  params: { locale: "en" | "ur" | "ar" };
+  params: Promise<{ locale: "en" | "ur" | "ar" }>;
 }) {
-  const { locale } = params;
+  const { locale } = await params;
+
   let messages;
   try {
     messages = (await import(`../../../messages/${locale}.json`)).default;
@@ -23,7 +24,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Navbar locale={locale} />
       {children}
-      <Footer locale={locale} />
+      <Footer />
     </NextIntlClientProvider>
   );
 }

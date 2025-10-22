@@ -2,11 +2,12 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-export function Hero({ locale }: { locale: "en"|"ur"|"ar" }) {
+export function Hero() {
   const t = useTranslations();
 
   return (
-    <section className="container-page py-10 lg:py-16 grid gap-10 lg:grid-cols-[1.2fr,1fr] items-center">
+    <section className="container-page py-10 lg:py-16 grid gap-10 lg:grid-cols-2 items-center">
+      {/* LEFT: copy */}
       <div className="space-y-4">
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">Muhammad Qasim</h1>
         <p className="opacity-80">{t("hero.subtitle")}</p>
@@ -19,13 +20,13 @@ export function Hero({ locale }: { locale: "en"|"ur"|"ar" }) {
         </div>
       </div>
 
-      {/* Taller container; contain the portrait so it doesn’t crop */}
-      <div className="relative w-full aspect-[3/4] max-h-[640px] mx-auto glass overflow-hidden">
+      {/* RIGHT: full-body portrait */}
+      <div className="relative w-full max-w-[420px] aspect-[3/4] justify-self-end glass overflow-hidden">
         <Image
-          src="/images/qasim-full.png"    // ensure file exists in /public/images
+          src="/images/qasim-full.png"
           alt={t("alt.fullBody")}
           fill
-          sizes="(max-width:1024px) 100vw, 520px"
+          sizes="(max-width:1024px) 80vw, 420px"
           className="object-contain"
           priority
         />

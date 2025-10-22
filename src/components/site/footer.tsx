@@ -1,24 +1,21 @@
-﻿import Link from "next/link";
-import { PROFILE, SOCIALS } from "@/content/site";
-
-export function Footer({ locale }: { locale: "en"|"ur"|"ar" }){
-  const year = new Date().getFullYear();
+﻿export function Footer() {
   return (
-    <footer className="mt-16 border-t border-white/10">
-      <div className="container-page py-10">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <div className="text-lg font-semibold">{PROFILE.name}</div>
-            <p className="opacity-80 text-sm">{PROFILE.role}</p>
-            <p className="opacity-60 text-xs">{PROFILE.location}</p>
+    <footer className="container-page py-10 text-sm opacity-90">
+      <div className="grid gap-6 sm:grid-cols-2 items-start">
+        <div>
+          <div className="font-medium">Muhammad Qasim</div>
+          <div className="opacity-80">Full-Stack Web Developer & Blogger</div>
+          <div className="opacity-60 mt-2">
+            Yousuf House, St # 2, Islamabad View Colony, Rawalpindi, Punjab, Pakistan
           </div>
-          <div className="md:justify-self-end flex gap-4 flex-wrap">
-            {SOCIALS.map((s) => (
-              <Link key={s.href} href={s.href} className="nav-link underline-offset-4 hover:underline" target="_blank">{s.label}</Link>
-            ))}
-          </div>
+          <div className="opacity-60 mt-2">© 2025 · Built with Next.js</div>
         </div>
-        <div className="mt-6 opacity-60 text-xs">© {year} · Built with Next.js</div>
+        <nav className="justify-self-end flex gap-4">
+          <a href="https://github.com/meqasim" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/meqasim" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://www.facebook.com/meqasim95" target="_blank" rel="noreferrer">Facebook</a>
+          <a href="https://www.youtube.com/@meqasim" target="_blank" rel="noreferrer">YouTube</a>
+        </nav>
       </div>
     </footer>
   );

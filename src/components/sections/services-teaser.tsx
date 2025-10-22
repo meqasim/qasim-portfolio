@@ -1,23 +1,29 @@
 ﻿"use client";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
 import { SERVICES } from "@/content/services";
 
 export function ServicesTeaser() {
-  const t = useTranslations("sections");
+  const t = useTranslations();
+  const locale = useLocale();
   return (
-    <section id="services" className="container-page py-10 space-y-6">
-      <h2 className="text-xl font-semibold">{t("services")}</h2>
-      <div className="grid md:grid-cols-3 gap-6">
+    <section className="container-page py-12 space-y-6" id="services">
+      <h2 className="text-xl font-semibold">{t("sections.services")}</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SERVICES.map((s, i) => (
-          <div key={i} className="glass p-5 space-y-2">
-            <h3 className="font-medium">{s.title}</h3>
-            <ul className="list-disc pl-5 opacity-80">
-              {s.points.map(p => <li key={p}>{p}</li>)}
+          <div key={i} className="glass p-5">
+            <div className="font-medium">{s.title}</div>
+            <ul className="mt-2 list-disc ms-5 opacity-80 text-sm">
+              {s.points.map((p, j) => <li key={j}>{p}</li>)}
             </ul>
           </div>
         ))}
       </div>
-      <a href="/en#services" className="underline opacity-80 hover:opacity-100">View all services →</a>
+      <div>
+        <Link href={`/${locale}/services`} className="text-sm underline opacity-80 hover:opacity-100">
+          View all services →
+        </Link>
+      </div>
     </section>
   );
 }
