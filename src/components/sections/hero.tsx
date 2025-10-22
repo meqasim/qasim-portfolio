@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import {useTranslations} from "next-intl";
 
 export function Hero() {
   const t = useTranslations();
@@ -11,13 +12,19 @@ export function Hero() {
         <h1 className="text-3xl md:text-4xl font-semibold">{t("hero.title")}</h1>
         <p className="opacity-80">{t("hero.subtitle")}</p>
         <p className="opacity-70 max-w-prose">{t("hero.blurb")}</p>
-        <div className="flex gap-3 pt-2">
+        <div className="flex flex-wrap gap-3 pt-2">
+          <Link href="./contact" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
+            {t("cta.hire")}
+          </Link>
+          <a href="/cv.pdf" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
+            {t("cta.cv")}
+          </a>
           <a href="https://wa.me/923410592668" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">
             {t("cta.whatsapp")}
           </a>
-          <a href="/cv.pdf" className="px-4 py-2 rounded border border-white/20 opacity-90 hover:opacity-100">{t("cta.cv")}</a>
         </div>
       </div>
+
       <div className="relative h-[420px] md:h-[560px]">
         <Image
           src="/images/qasim-full.png"
