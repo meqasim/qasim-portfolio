@@ -6,9 +6,7 @@ export function ProjectsSection() {
       <h2 className="mb-6 text-xl font-semibold">Selected Projects</h2>
 
       <div className="relative mx-auto max-w-4xl">
-        {/* center line */}
         <div className="pointer-events-none absolute left-1/2 top-0 -ml-px h-full w-0.5 bg-gradient-to-b from-emerald-300/40 via-emerald-300/10 to-transparent" />
-
         <ol className="space-y-10">
           {projects.map((p: any, i: number) => {
             const left = i % 2 === 0;
@@ -26,11 +24,7 @@ export function ProjectsSection() {
                     )}
                   </div>
                 </div>
-
-                {/* connector dot */}
-                <span
-                  className="pointer-events-none absolute left-1/2 top-4 z-10 -ml-2 h-4 w-4 rounded-full bg-emerald-400/60 ring-4 ring-gray-950 dark:ring-gray-950"
-                />
+                <span className="pointer-events-none absolute left-1/2 top-4 z-10 -ml-2 h-4 w-4 rounded-full bg-emerald-400/60 ring-4 ring-gray-950" />
               </li>
             );
           })}
