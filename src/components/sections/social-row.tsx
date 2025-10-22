@@ -12,3 +12,5 @@ export function SocialRow(){
     </div>
   );
 }
+
+export default SocialRow;

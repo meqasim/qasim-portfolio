@@ -32,3 +32,5 @@ export function ServicesTeaser() {
     </section>
   );
 }
+
+export default ServicesTeaser;
