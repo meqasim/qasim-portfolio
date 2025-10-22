@@ -1,17 +1,22 @@
-﻿"use client";
-import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
-export function ThemeToggle(){
-  const { theme, setTheme } = useTheme();
-  const isDark = theme !== "light";
+"use client";
+import {useTheme} from "next-themes";
+import {useEffect, useState} from "react";
+
+export function ThemeToggle() {
+  const {resolvedTheme, setTheme} = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <button className="px-2 py-1">🌙</button>;
+
+  const isDark = (resolvedTheme ?? "dark") === "dark";
   return (
     <button
       aria-label="Toggle theme"
+      className="px-2 py-1 rounded hover:opacity-80"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="glass rounded-xl p-2"
-      title="Toggle theme"
+      title={isDark ? "Switch to light" : "Switch to dark"}
     >
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      {isDark ? "☀" : "🌙"}
     </button>
   );
 }
