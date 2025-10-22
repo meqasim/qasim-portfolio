@@ -1,42 +1,48 @@
-import { PROJECTS as projects } from "@/content/projects";
+import { PROJECTS } from "@/content/projects";
+
+type Project = (typeof PROJECTS)[number];
 
 export function ProjectsSection() {
+  const items: readonly Project[] = PROJECTS;
+
   return (
-    <section id="projects" className="mt-16">
-      <h2 className="mb-6 text-xl font-semibold">Selected Projects</h2>
-
-      <div className="relative mx-auto max-w-4xl">
-        {/* center timeline */}
-        <div className="pointer-events-none absolute left-1/2 top-0 -ml-px h-full w-0.5 bg-gradient-to-b from-emerald-300/40 via-emerald-300/10 to-transparent" />
-
+    <section id="projects" className="container py-12">
+      <h2 className="text-2xl font-bold mb-6">Projects</h2>
+      <div className="relative">
+        {/* vertical timeline line */}
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-foreground/20 pointer-events-none" />
         <ol className="space-y-10">
-          {projects.map((p: any, i: number) => {
-            const left = i % 2 === 0;
-            return (
-              <li key={p.title} className="relative grid grid-cols-1 md:grid-cols-2">
-                <div className={left ? "md:col-start-1 md:pr-8" : "md:col-start-2 md:pl-8"}>
-                  <div className="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
-                    {p.badge && <div className="mb-1 text-[13px] text-emerald-300/80">{p.badge}</div>}
-                    <div className="text-base font-medium">{p.title}</div>
-                    {p.summary && <p className="mt-2 text-sm text-neutral-300/80">{p.summary}</p>}
-                    {p.link && (
-                      <a href={p.link} target="_blank" className="mt-3 inline-block text-sm text-emerald-300 hover:underline">
-                        Open
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* timeline dot */}
-                <span className="pointer-events-none absolute left-1/2 top-4 z-10 -ml-2 h-4 w-4 rounded-full bg-emerald-400/60 ring-4 ring-gray-950 dark:ring-gray-950" />
-              </li>
-            );
-          })}
+          {items.map((p, idx) => (
+            <li key={idx} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+              {/* left/right alternate around the center line */}
+              <div className={(idx % 2 === 0 ? "order-1" : "order-2") + " md:text-right"}>
+                <h3 className="text-xl font-semibold">{(p as any).title ?? (p as any).name}</h3>
+                {"subtitle" in p && (p as any).subtitle ? (
+                  <p className="opacity-80">{(p as any).subtitle}</p>
+                ) : null}
+              </div>
+              <div className={(idx % 2 === 0 ? "order-2" : "order-1") + " relative"}>
+                <div className="absolute md:left-[-0.55rem] left-1/2 md:translate-x-0 -translate-x-1/2 top-2 h-3 w-3 rounded-full bg-foreground" />
+                {"description" in p && (p as any).description ? (
+                  <p className="text-sm opacity-80">{(p as any).description}</p>
+                ) : null}
+                {"link" in p && (p as any).link ? (
+                  <a
+                    href={(p as any).link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-block underline underline-offset-4"
+                  >
+                    Visit
+                  </a>
+                ) : null}
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
   );
 }
 
-// Provide default export too so both `import X` and `import {X}` work
 export default ProjectsSection;

@@ -1,26 +1,30 @@
-import type {ReactNode} from 'react';
-import {NextIntlClientProvider} from 'next-intl';
-import {Navbar} from '@/components/site/navbar';
-import {Footer} from '@/components/site/footer';
+import type {ReactNode} from "react";
+import {NextIntlClientProvider} from "next-intl";
+import Navbar from "@/components/site/navbar";
+import Footer from "@/components/site/footer";
 
-export const runtime = 'edge';
+const SUPPORTED = ["en", "ur", "ar"] as const;
+type Locale = typeof SUPPORTED[number];
 
 export default async function LocaleLayout({
   children,
-  params,
+  params
 }: {
   children: ReactNode;
-  params: Promise<{locale: 'en' | 'ur' | 'ar' | string}>;
+  params: Promise<{ locale: string }>;
 }) {
-  const {locale} = await params;
-  const active = (['en', 'ur', 'ar'] as const).includes(locale as any) ? locale : 'en';
-  const messages = (await import(`../../../messages/${active}.json`)).default;
+  const {locale: raw} = await params;
+  const locale: Locale = (SUPPORTED as readonly string[]).includes(raw) ? (raw as Locale) : "en";
+  const messages = (await import(`../../../messages/${locale}.json`)).default as Record<string, string>;
+  const dir = locale === "ar" || locale === "ur" ? "rtl" : "ltr";
 
   return (
-    <NextIntlClientProvider locale={active} messages={messages}>
-      <Navbar />
-      <main className="mx-auto max-w-6xl px-3 py-8 sm:px-4">{children}</main>
-      <Footer />
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <div dir={dir} className="min-h-screen flex flex-col">
+        <Navbar />
+        {children}
+        <Footer />
+      </div>
     </NextIntlClientProvider>
   );
 }
