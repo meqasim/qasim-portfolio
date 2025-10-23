@@ -1,27 +1,3 @@
 import Image from "next/image";
-import Link from "next/link";
-
-export function Hero() {
-  return (
-    <section className="container mx-auto px-4 py-14">
-      <div className="grid md:grid-cols-[1.2fr,1fr] items-center gap-10">
-        <div>
-          <p className="text-xs tracking-widest text-emerald-400 mb-2">HI, I&apos;M</p>
-          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">HaFiZ <span className="text-emerald-500">MuHaMMaD QaSiM</span></h1>
-          <p className="opacity-80 max-w-xl">
-            Full-stack developer specializing in Next.js, TypeScript and modern UI.
-          </p>
-          <div className="mt-6 flex gap-3">
-            <Link href="/contact" className="px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-500">Hire Me</Link>
-            <Link href="/projects" className="px-4 py-2 rounded-md ring-1 ring-white/15 hover:bg-white/5">Projects</Link>
-          </div>
-        </div>
-        <div className="justify-self-center">
-          <Image src="/hero.png" alt="Hafiz Muhammad Qasim" width={360} height={460} className="rounded-xl ring-1 ring-white/10" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export default Hero;
+import Link from "next/link"; export function Hero() { return ( <section className="mx-auto px-4 py-14"> <div className="grid md:grid-cols-[1.2fr,1fr] items-center gap-10"> <div> <p className="text-xs tracking-widest text-emerald-400 mb-2">HI, I&apos;M</p> <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">HaFiZ <span className="text-emerald-500">MuHaMMaD QaSiM</span></h1> <p className="opacity-80 max-w-xl"> Full-stack developer specializing in Next.js, TypeScript and modern UI. </p> <div className="mt-6 flex gap-3"> <Link href="/contact" className="px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-500">Hire Me</Link> <Link href="/projects" className="px-4 py-2 rounded-md ring-1 ring-white/15 hover:bg-white/5">Projects</Link> </div> </div> <div className="justify-self-center"> <Image src="/hero.png" alt="Hafiz Muhammad Qasim" width={360} height={460} className="rounded-xl ring-1 ring-white/10" /> </div> </div> </section> );
+} export default Hero;

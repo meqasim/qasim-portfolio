@@ -1,18 +1,3 @@
-export function Testimonials() {
-  return (
-    <section id="testimonials" className="container mx-auto px-4 py-16">
-      <h2 className="text-xl font-semibold mb-8">Testimonials</h2>
-      <div className="grid md:grid-cols-2 gap-6">
-        <blockquote className="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
-          <p className="text-sm">“Qasim ships fast, clean, and reliable features.”</p>
-          <footer className="mt-2 text-xs opacity-70">Client A — Founder, Startup</footer>
-        </blockquote>
-        <blockquote className="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
-          <p className="text-sm">“Great communication and attention to detail.”</p>
-          <footer className="mt-2 text-xs opacity-70">Client B — PM, Agency</footer>
-        </blockquote>
-      </div>
-    </section>
-  );
+export function Testimonials() { return ( <section id="testimonials" className="mx-auto px-4 py-16"> <h2 className="text-xl font-semibold mb-8">Testimonials</h2> <div className="grid md:grid-cols-2 gap-6"> <blockquote className="rounded-xl bg-white/5 ring-1 ring-white/10 p-4"> <p className="text-sm">“Qasim ships fast, clean, and reliable features.”</p> <footer className="mt-2 text-xs opacity-70">Client A — Founder, Startup</footer> </blockquote> <blockquote className="rounded-xl bg-white/5 ring-1 ring-white/10 p-4"> <p className="text-sm">“Great communication and attention to detail.”</p> <footer className="mt-2 text-xs opacity-70">Client B — PM, Agency</footer> </blockquote> </div> </section> );
 }
 export default Testimonials;
