@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {Globe} from "lucide-react";
 
 export default function LangSwitcher() {
   const pathname = usePathname() || "/en";
@@ -12,7 +11,6 @@ export default function LangSwitcher() {
 
   return (
     <div className="inline-flex items-center gap-1">
-      <Globe size={16} className="opacity-70" />
       {(["en","ur","ar"] as const).map((loc) => (
         <Link
           key={loc}

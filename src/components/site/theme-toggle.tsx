@@ -36,7 +36,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-white/5 ring-1 ring-white/10 hover:bg-white/10"
     >
-      {isDark ? <Moon size={16} /> : <Sun size={16} />}
+      {isDark ? <Sun size={16} /> : <Moon size={16} />}
     </button>
   );
 }
