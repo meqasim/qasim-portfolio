@@ -1,0 +1,8 @@
+{
+  "nav": {"home":"الرئيسية","about":"من أنا","blog":"المدونة","contact":"اتصال","projects":"المشاريع","resume":"السيرة الذاتية"},
+  "hero": {"title":"مطوّر ويب متكامل وخبير Stripe/Prisma","ctaHire":"وظّفني عبر واتساب","ctaEmail":"راسلني عبر البريد"},
+  "sections": {"services":"الخدمات","projects":"المشاريع","education":"التعليم (الخط الزمني)","contact":"اتصال"},
+  "contact": {"emailReply":"الرد خلال 1–2 ساعة","waReply":"الرد ≈30 دقيقة"},
+  "resume": {"experience":"الخبرات","education":"التعليم"},
+  "blog": {"redirecting":"إعادة التوجيه إلى المدونة..."}
+}

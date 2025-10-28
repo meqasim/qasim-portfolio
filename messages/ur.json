@@ -1,0 +1,8 @@
+{
+  "nav": {"home":"ہوم","about":"کے بارے میں","blog":"بلاگ","contact":"رابطہ","projects":"پراجیکٹس","resume":"ریزیومے"},
+  "hero": {"title":"فل اسٹیک ویب ڈویلپر اور اسٹرائپ/پریزما اسپیشلسٹ","ctaHire":"واٹس ایپ پر ہائر کریں","ctaEmail":"مجھے ای میل کریں"},
+  "sections": {"services":"سروسز","projects":"پراجیکٹس","education":"تعلیم (ٹائم لائن)","contact":"رابطہ"},
+  "contact": {"emailReply":"جواب 1–2 گھنٹے","waReply":"جواب ≈30 منٹ"},
+  "resume": {"experience":"تجربہ","education":"تعلیم"},
+  "blog": {"redirecting":"بلاگ کی طرف لے جایا جا رہا ہے..."}
+}

@@ -1,0 +1,8 @@
+{
+  "nav": {"home":"Home","about":"About","blog":"Blog","contact":"Contact","projects":"Projects","resume":"Resume"},
+  "hero": {"title":"Full-Stack Web Developer & Stripe/Prisma Specialist","ctaHire":"Hire me on WhatsApp","ctaEmail":"Email me"},
+  "sections": {"services":"Services","projects":"Projects","education":"Education (Timeline)","contact":"Contact"},
+  "contact": {"emailReply":"reply 1–2 hours","waReply":"reply ≈30 minutes"},
+  "resume": {"experience":"Experience","education":"Education"},
+  "blog": {"redirecting":"Redirecting to blog..."}
+}
