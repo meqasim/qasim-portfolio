@@ -6,6 +6,8 @@ import {Navbar} from "@/components/site/Navbar";
 import {Footer} from "@/components/site/Footer";
 import {ThemeScript} from "@/components/site/ThemeScript";
 
+export const runtime = "edge"; // 👈 Cloudflare Pages requires Edge for SSR routes under this segment
+
 export default async function LocaleLayout({
   children,
   params
