@@ -1,9 +1,0 @@
-{
-  "hero": { "title": "Muhammad Qasim", "subtitle": "Full-Stack Web Developer & Blogger",
-    "blurb": "I build fast, clean, business-ready web apps with Next.js, TypeScript, and Tailwind." },
-  "cta": { "hire": "Hire Me", "cv": "Download CV", "whatsapp": "WhatsApp" },
-  "nav": { "home": "Home", "projects": "Projects", "services":"Services", "about": "About", "contact": "Contact", "resume": "Resume" },
-  "alt": { "fullBody": "Full-body portrait of Muhammad Qasim" },
-  "footer": { "location": "Yousuf House, St # 2, Islamabad View Colony, Rawalpindi, Punjab, Pakistan" },
-  "sections": { "projects":"Selected Projects", "services":"Services", "testimonials":"Testimonials" }
-}
