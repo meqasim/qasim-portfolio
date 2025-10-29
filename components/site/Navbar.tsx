@@ -5,10 +5,10 @@ import {useLocale, useTranslations} from "next-intl";
 import {usePathname} from "next/navigation";
 import {site} from "@/lib/site";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { LangDropdown } from "./LangDropdown";
 import { ThemeToggle } from "./ThemeToggle";
+import { Menu, X } from "lucide-react";
 
 function normalize(p: string) {
   if (!p) return "/";
@@ -20,13 +20,16 @@ function isLocaleHome(href: string) {
   const segs = n.split("/").filter(Boolean);
   return segs.length === 1; // "/en"
 }
-function NavPill({href,label}:{href:string;label:string}) {
+function useActive(href:string){
   const pathname = normalize(usePathname() || "/");
   const hrefN = normalize(href);
-  const active = isLocaleHome(hrefN)
+  return isLocaleHome(hrefN)
     ? pathname === hrefN
     : pathname === hrefN || pathname.startsWith(hrefN + "/");
+}
 
+function NavPill({href,label}:{href:string;label:string}) {
+  const active = useActive(href);
   return (
     <Link
       href={href}
@@ -41,17 +44,20 @@ function NavPill({href,label}:{href:string;label:string}) {
 }
 
 export function Navbar() {
-  // IMPORTANT: call all hooks on every render (no early return before hooks)
   const t = useTranslations("nav");
   const locale = useLocale();
   const L = (p:string) => `/${locale}${p}`;
 
   const [mounted, setMounted] = useState(false);
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   useEffect(() => setMounted(true), []);
+  useEffect(() => { setOpen(false); }, [pathname]); // close panel on nav
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-black/60 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4">
+        {/* Top bar */}
         <div className="flex h-14 items-center justify-between gap-3">
           <Link
             href={L("/")}
@@ -60,6 +66,7 @@ export function Navbar() {
             {site.name}
           </Link>
 
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-2">
             <NavPill href={L("/")}       label={t("home")} />
             <NavPill href={L("/about")}  label={t("about")} />
@@ -68,49 +75,60 @@ export function Navbar() {
             <NavPill href={L("/resume")} label={t("resume")} />
           </nav>
 
+          {/* Desktop actions */}
           <div className="hidden md:flex items-center gap-2">
-            {/* Render Radix-based controls only after mount to avoid hydration ID mismatches */}
-            {mounted ? (
-              <>
-                <LangDropdown />
-                <ThemeToggle />
-              </>
-            ) : (
-              /* placeholder keeps layout stable during SSR */
-              <div className="h-9 w-[90px] rounded-2xl border border-[var(--border)]" />
-            )}
+            {mounted ? (<><LangDropdown /><ThemeToggle /></>) : (<div className="h-9 w-[90px] rounded-2xl border border-[var(--border)]" />)}
             <a href={site.whatsapp} target="_blank" rel="noreferrer">
               <Button className="rounded-2xl bg-[var(--primary)] text-black hover:opacity-90">Hire</Button>
             </a>
           </div>
 
+          {/* Mobile: just a Menu button on top bar */}
           <div className="md:hidden">
-            {mounted ? (
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="secondary" className="rounded-2xl">Menu</Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-72">
-                  <div className="mt-6 flex flex-col gap-3">
-                    <NavPill href={L("/")}       label={t("home")} />
-                    <NavPill href={L("/about")}  label={t("about")} />
-                    <NavPill href={L("/blog")}   label={t("blog")} />
-                    <NavPill href={L("/contact")}label={t("contact")} />
-                    <NavPill href={L("/resume")} label={t("resume")} />
-                    <Separator />
-                    <div className="flex items-center gap-2">
-                      <LangDropdown />
-                      <ThemeToggle />
-                    </div>
-                    <a href={site.whatsapp} target="_blank" rel="noreferrer" className="mt-2">
-                      <Button className="w-full rounded-2xl bg-[var(--primary)] text-black hover:opacity-90">Hire</Button>
-                    </a>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            ) : (
-              <Button variant="secondary" className="rounded-2xl" disabled>Menu</Button>
-            )}
+            <Button
+              variant="secondary"
+              className="rounded-2xl"
+              aria-expanded={open}
+              aria-controls="mobile-menu-panel"
+              onClick={() => setOpen(o => !o)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              title={open ? "Close menu" : "Open menu"}
+            >
+              {open ? <X size={16}/> : <Menu size={16}/>}
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile dropdown panel (in-flow -> pushes hero down) */}
+        <div
+          id="mobile-menu-panel"
+          aria-labelledby="mobile-menu-title"
+          className={[
+            "md:hidden overflow-hidden rounded-2xl border border-[var(--border)] bg-[color-mix(in_lab,var(--background)_85%,transparent)] backdrop-blur",
+            "transition-all duration-300",
+            open ? "max-h-[80vh] mt-2 py-3" : "max-h-0 mt-0 py-0"
+          ].join(" ")}
+        >
+          <div className="px-3">
+            <div className="mb-3 flex items-center justify-between">
+              <h2 id="mobile-menu-title" className="text-sm font-medium">{site.name}</h2>
+              <div className="flex items-center gap-2">
+                {mounted ? (<><LangDropdown /><ThemeToggle /></>) : (<div className="h-9 w-[90px] rounded-2xl border border-[var(--border)]" />)}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <Link href={L("/")}       className="rounded-full px-3 py-2 text-[15px] hover:bg-[color-mix(in_lab,var(--primary)_12%,transparent)] data-[active=true]:bg-[color-mix(in_lab,var(--primary)_18%,transparent)]" data-active={useActive(L("/"))}> {t("home")} </Link>
+              <Link href={L("/about")}  className="rounded-full px-3 py-2 text-[15px] hover:bg-[color-mix(in_lab,var(--primary)_12%,transparent)] data-[active=true]:bg-[color-mix(in_lab,var(--primary)_18%,transparent)]" data-active={useActive(L("/about"))}> {t("about")} </Link>
+              <Link href={L("/blog")}   className="rounded-full px-3 py-2 text-[15px] hover:bg-[color-mix(in_lab,var(--primary)_12%,transparent)] data-[active=true]:bg-[color-mix(in_lab,var(--primary)_18%,transparent)]" data-active={useActive(L("/blog"))}> {t("blog")} </Link>
+              <Link href={L("/contact")}className="rounded-full px-3 py-2 text-[15px] hover:bg-[color-mix(in_lab,var(--primary)_12%,transparent)] data-[active=true]:bg-[color-mix(in_lab,var(--primary)_18%,transparent)]" data-active={useActive(L("/contact"))}> {t("contact")} </Link>
+              <Link href={L("/resume")} className="rounded-full px-3 py-2 text-[15px] hover:bg-[color-mix(in_lab,var(--primary)_12%,transparent)] data-[active=true]:bg-[color-mix(in_lab,var(--primary)_18%,transparent)]" data-active={useActive(L("/resume"))}> {t("resume")} </Link>
+            </div>
+
+            <Separator className="my-3" />
+            <a href={site.whatsapp} target="_blank" rel="noreferrer" className="block">
+              <Button className="w-full rounded-2xl bg-[var(--primary)] text-black hover:opacity-90">Hire</Button>
+            </a>
           </div>
         </div>
       </div>

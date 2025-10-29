@@ -22,7 +22,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
           return (
             <li key={i} className="grid grid-cols-1 md:grid-cols-2 md:gap-8">
               <div className={onLeft ? "md:col-start-1" : "md:col-start-2 md:row-start-1"}>
-                <Card className="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-sm transition-colors hover:border-[var(--primary)]">
+                <Card className="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-sm transition-colors hover:border-[var(--primary)] active:border-[var(--primary)]">
                   <div className="absolute left-1/2 top-5 size-3 -translate-x-1/2 rounded-full border border-[var(--border)] bg-[var(--background)]"></div>
                   <h3 className="text-lg font-semibold">{it.title}</h3>
                   {(it.period || it.subtitle) && (
@@ -37,7 +37,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
                     </div>
                   ) : null}
                   {it.href && (
-                    <a href={it.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-sm underline hover:text-[var(--primary)] hover:decoration-[var(--primary)]">
+                    <a href={it.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-sm underline hover:text-[var(--primary)] hover:decoration-[var(--primary)] active:text-[var(--primary)]">
                       Visit →
                     </a>
                   )}
